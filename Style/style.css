@@ -1,0 +1,144 @@
+/* New Color Palette, Gradients & Variables for a Music Theory Feel */
+:root {
+  /* Background gradients */
+  --bg-main: linear-gradient(135deg, #1e3c72, #2a5298);           /* deep, rich blue */
+  --bg-sidebar: linear-gradient(135deg, #2C3E50, #4CA1AF);          /* cool blue-gray */
+  --bg-content: linear-gradient(135deg, #ffffff, #e6e6e6);           /* subtle off-white */
+  
+  /* Sidebar topper background image (250px by 60px) */
+  --topper-image: url('Images/Placeholder250x601.png');
+  --topper-bg: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient topper */
+
+  /* Sidebar text and menu items */
+  --sidebar-text: #2c3e50;                 /* dark text */
+  --menu-item-bg: rgba(255, 255, 255, 0.1); /* subtle overlay */
+  --menu-item-hover-bg: rgba(255, 255, 255, 0.2);
+  --menu-item-active-bg: #f1c40f;           /* bright gold for folders */
+  --menu-item-active-bg-subfolder: #f39c12;  /* orange for subfolders */
+  --text-active: #2c3e50;                  /* dark text */
+
+  /* Transition timing */
+  --transition-duration: 0.5s;
+}
+
+/* Global Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-active);
+}
+
+/* Container Layout: Sidebar on the left, content on the right */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  height: 100vh; /* Ensures sidebar fits viewport */
+  background: var(--bg-sidebar);
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden; /* Eliminates scrollbar */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensures proper alignment */
+}
+
+/* Sidebar Topper: now displays the image with blue gradient */
+.sidebar-topper {
+  display: block;
+  width: 250px;  /* Exactly 250px wide */
+  height: 60px;  /* Exactly 60px tall */
+  background: var(--topper-bg), var(--topper-image) no-repeat center;
+  background-size: contain;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  flex-shrink: 0; /* Prevents resizing */
+}
+
+/* Tree Menu styling */
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Ensures menu fills remaining space */
+}
+
+/* Fix for extra space pushing content down */
+.menu li {
+  cursor: pointer;
+  padding: 8px 10px;
+  margin: 4px 0;
+  background: var(--menu-item-bg);
+  color: var(--sidebar-text);
+  border-radius: 4px;
+  transition: background var(--transition-duration) ease-out;
+}
+
+/* Hover effect */
+.menu li:hover {
+  background: var(--menu-item-hover-bg);
+}
+
+/* Active state for folders (gold background, dark text) */
+.menu li.active {
+  background: var(--menu-item-active-bg);
+  color: var(--text-active);
+}
+
+/* Active state override for subfolders (orange background, dark text) */
+.menu li[data-type="subfolder"].active {
+  background: var(--menu-item-active-bg-subfolder);
+  color: var(--text-active);
+}
+
+/* Indentation for hierarchy */
+.menu li[data-level="1"] {
+  /* Folder level: no extra indent */
+}
+.menu li[data-level="2"] {
+  padding-left: 20px; /* Subfolders: moderate indent */
+}
+.menu li[data-level="3"] {
+  padding-left: 40px; /* Files: deeper indent */
+}
+
+/* Child UL container with smooth slide animation */
+.child-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-duration) ease-out;
+}
+
+.child-menu.expanded {
+  max-height: 1000px; /* Large enough to accommodate the expanded content */
+}
+
+/* Right Content Area Styling with subtle gradient */
+.content-area {
+  flex: 1;
+  background: var(--bg-content);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Content Placeholder with ~25% top margin */
+.content-placeholder {
+  margin-top: 25%;
+  background-color: #ffffff;
+  color: var(--text-active);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
