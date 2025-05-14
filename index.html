@@ -4,28 +4,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Music Theory</title>
-  <!-- Using folder paths for CSS and JS -->
   <link href="Style/style.css" rel="stylesheet" type="text/css"/>
   <script defer src="Script/script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <!-- Sidebar with Topper and Tree Menu -->
-    <div class="sidebar">
-      <!-- Topper: Clicking this reloads the site -->
-      <a href="index.html" class="sidebar-topper" title="Reload Home">
-        Music Theory
-      </a>
-      <!-- The tree menu will be built dynamically -->
-      <ul id="menu" class="menu"></ul>
-    </div>
-    <!-- Right Content Area -->
-    <div class="content-area">
-      <div class="content-placeholder">
-        <h1>Display Content</h1>
-        <p>Select a file from the sidebar to see its content here.</p>
-      </div>
+
+  <!-- Top Navigation Bar -->
+  <div class="top-nav">
+    <button class="tab-button" data-tab="tab1">Tab 1</button>
+    <button class="tab-button" data-tab="tab2">Tab 2</button>
+    <button class="tab-button" data-tab="tab3">Tab 3</button>
+  </div>
+
+  <!-- Sidebar with Topper and Tree Menu -->
+  <div class="sidebar">
+    <a href="index.html" class="sidebar-topper" title="Reload Home">Music Theory</a>
+    <ul id="menu" class="menu"></ul>
+  </div>
+
+  <!-- Right Content Area -->
+  <div class="content-area">
+    <div class="content-placeholder">
+      <h1>Display Content</h1>
+      <p>Select a file from the sidebar to see its content here.</p>
     </div>
   </div>
+
+  <!-- Dropdown Menus for Tabs -->
+  <div id="tab1-content" class="tab-content">
+    <ul>
+      <li><a href="#">Link 1A</a></li>
+      <li><a href="#">Link 1B</a></li>
+      <li><a href="#">Link 1C</a></li>
+    </ul>
+  </div>
+
+  <div id="tab2-content" class="tab-content">
+    <ul>
+      <li><a href="#">Link 2A</a></li>
+      <li><a href="#">Link 2B</a></li>
+      <li><a href="#">Link 2C</a></li>
+    </ul>
+  </div>
+
+  <div id="tab3-content" class="tab-content">
+    <ul>
+      <li><a href="#">Link 3A</a></li>
+      <li><a href="#">Link 3B</a></li>
+      <li><a href="#">Link 3C</a></li>
+    </ul>
+  </div>
+
 </body>
 </html>

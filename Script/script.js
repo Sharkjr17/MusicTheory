@@ -143,3 +143,33 @@ document.addEventListener("DOMContentLoaded", function () {
     menu.appendChild(folderNode);
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tabButtons = document.querySelectorAll(".tab-button");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  // Function to toggle tabs
+  function toggleTab(event) {
+    const tabId = event.currentTarget.getAttribute("data-tab");
+    const targetContent = document.getElementById(`${tabId}-content`);
+
+    // Hide all tab dropdowns first
+    tabContents.forEach(tab => {
+      if (tab !== targetContent) {
+        tab.style.display = "none";
+      }
+    });
+
+    // Toggle selected tab visibility
+    if (targetContent.style.display === "block") {
+      targetContent.style.display = "none";
+    } else {
+      targetContent.style.display = "block";
+    }
+  }
+
+  // Attach click events to each tab button
+  tabButtons.forEach(button => {
+    button.addEventListener("click", toggleTab);
+  });
+});
