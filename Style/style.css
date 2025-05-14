@@ -6,7 +6,6 @@
   --bg-content: linear-gradient(135deg, #ffffff, #e6e6e6);           /* subtle off-white */
   
   /* Sidebar topper background image (250px by 60px) */
-  --topper-image: url('Images/Placeholder250x601.png');
   --topper-bg: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient topper */
 
   /* Sidebar text and menu items */
@@ -16,6 +15,7 @@
   --menu-item-active-bg: #f1c40f;           /* bright gold for folders */
   --menu-item-active-bg-subfolder: #f39c12;  /* orange for subfolders */
   --text-active: #2c3e50;                  /* dark text */
+  --white-text: #ffffff;                    /* white */
 
   /* Transition timing */
   --transition-duration: 0.5s;
@@ -38,12 +38,12 @@ html, body {
 
 /* Sidebar Styling */
 .sidebar {
-  width: 250px;
+  width: 15%;
   height: 100vh; /* Ensures sidebar fits viewport */
   background: var(--bg-sidebar);
   padding: 10px;
   box-sizing: border-box;
-  overflow: hidden; /* Eliminates scrollbar */
+  overflow: visible; /* Eliminates scrollbar */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -53,14 +53,16 @@ html, body {
 /* Sidebar Topper: now displays the image with blue gradient */
 .sidebar-topper {
   display: block;
-  width: 250px;  /* Exactly 250px wide */
-  height: 60px;  /* Exactly 60px tall */
-  background: var(--topper-bg), var(--topper-image) no-repeat center;
+  width: 100%;
+  height: 3%;
+  background: var(--topper-bg);
   background-size: contain;
-  margin-bottom: 10px;
   border-radius: 4px;
   text-decoration: none;
-  flex-shrink: 0; /* Prevents resizing */
+  flex-shrink: 0;
+  color: var(--white-text);
+  text-align: center;
+  font-size-adjust: inherit;
 }
 
 /* Tree Menu styling */
@@ -90,6 +92,14 @@ html, body {
 /* Active state for folders (gold background, dark text) */
 .menu li.active {
   background: var(--menu-item-active-bg);
+  color: var(--text-active);
+}
+
+.menu li[data-type="folder"] {
+  color: var(--white-text);
+}
+
+.menu li[data-type="folder"].active {
   color: var(--text-active);
 }
 
