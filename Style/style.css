@@ -1,26 +1,15 @@
-/* GLOBAL SETUP */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg-main);
-  color: var(--text-active);
-  height: 100vh;
-  overflow: hidden; /* Prevents overall page scroll */
-}
-
-/* ROOT VARIABLES */
+/* ---------- ROOT VARIABLES & GLOBAL SETUP ---------- */
 :root {
   /* Background gradients */
-  --bg-main: linear-gradient(135deg, #1e3c72, #2a5298); /* deep, rich blue */
-  --bg-sidebar: linear-gradient(135deg, #2C3E50, #4CA1AF); /* cool blue-gray */
-  --bg-content: linear-gradient(135deg, #ffffff, #e6e6e6);  /* subtle off-white */
+  --bg-main: linear-gradient(135deg, #1e3c72, #2a5298);           /* deep, rich blue */
+  --bg-sidebar: linear-gradient(135deg, #2C3E50, #4CA1AF);          /* cool blue-gray */
+  --bg-content: linear-gradient(135deg, #ffffff, #e6e6e6);           /* subtle off-white */
   
-  /* Sidebar topper background image (using only gradient here for simplicity) */
+  /* Sidebar topper (using a blue gradient) */
   --topper-bg: linear-gradient(135deg, #1e3c72, #2a5298);
   
-  /* Sidebar text and menu items */
-  --sidebar-text: #2c3e50; /* dark text */
+  /* Sidebar text & menu item colors */
+  --sidebar-text: #2c3e50;
   --menu-item-bg: rgba(255, 255, 255, 0.1);
   --menu-item-hover-bg: rgba(255, 255, 255, 0.2);
   --menu-item-active-bg: #f1c40f;
@@ -28,54 +17,63 @@ html, body {
   --text-active: #2c3e50;
   --white-text: #ffffff;
   
-  /* Transition time */
+  /* Transition timing */
   --transition-duration: 0.5s;
 }
 
-/* CONTAINER LAYOUT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;              /* Full viewport height */
+  overflow: hidden;           /* Prevent overall page scroll */
+  background: var(--bg-main);
+  color: var(--text-active);
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- GRID LAYOUT ---------- */
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: min(18%, 280px) 1fr;
+  grid-template-rows: 100%;
   height: 100vh;
 }
 
-/* LEFT SIDEBAR */
+/* ---------- SIDEBAR (Grid Area: first column) ---------- */
 .sidebar {
-  width: min(18%, 280px);
-  height: 100vh;
+  grid-column: 1;
+  grid-row: 1;
   background: var(--bg-sidebar);
   padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
-/* SIDEBAR TOPPER */
 .sidebar-topper {
-  display: block;
   width: 100%;
   height: 60px;
   background: var(--topper-bg);
   background-size: contain;
   border-radius: 4px;
   text-decoration: none;
-  flex-shrink: 0;
   color: var(--white-text);
   text-align: center;
   font-size: 18px;
   font-weight: bold;
   line-height: 60px;
+  flex-shrink: 0;
 }
 
-/* TREE MENU */
 .menu {
-  list-style-type: none;
-  padding: 0;
+  list-style: none;
   margin: 0;
+  padding: 0;
   flex-grow: 1;
 }
+
+/* (Sidebar menu item stylings remain as before) */
 .menu li {
   cursor: pointer;
   padding: 8px 10px;
@@ -110,7 +108,7 @@ html, body {
   padding-left: 40px;
 }
 .child-menu {
-  list-style-type: none;
+  list-style: none;
   margin: 0;
   padding: 0;
   max-height: 0;
@@ -121,36 +119,59 @@ html, body {
   max-height: 1000px;
 }
 
-/* TOP BAR */
-/* Position the top bar to the right of the sidebar */
+/* ---------- MAIN AREA (Grid Area: second column) ---------- */
+.main {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 60px 1fr;  /* Top bar + content area */
+}
+
+/* ---------- TOP NAVIGATION BAR ---------- */
 .top-nav {
-  width: calc(100vw - min(18%, 280px));
-  height: 60px;
-  position: absolute;
-  top: 0;
-  left: min(18%, 280px);
+  grid-row: 1;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /* No background, tabs themselves will have background */
+  margin: 0;
+  padding: 0;
 }
 .tab-button {
   flex: 1;
   height: 60px;
-  background: #4CA1AF;
+  background: #4CA1AF;  /* Brighter solid color */
   color: var(--sidebar-text);
   border: 1px solid var(--text-active);
-  padding: 15px;
-  cursor: pointer;
   font-size: 16px;
-  transition: background 0.3s ease, filter 0.3s ease-in-out;
+  cursor: pointer;
   text-align: center;
+  line-height: 60px;
+  transition: background 0.3s ease, filter 0.3s ease-in-out;
 }
 .tab-button:hover {
   filter: brightness(1.2);
 }
 
-/* TAB DROPDOWN */
+/* ---------- CONTENT AREA ---------- */
+.content-area {
+  grid-row: 2;
+  background: var(--bg-content);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;     /* Prevent page-level scroll */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.content-placeholder {
+  width: 90%;
+  height: 100%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow-y: auto;     /* Internal scrolling */
+}
+
+/* ---------- TAB DROPDOWN MENUS ---------- */
 .tab-content {
   display: none;
   width: calc(100vw - min(18%, 280px));
@@ -164,6 +185,7 @@ html, body {
 }
 .tab-content ul {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 .tab-content ul li {
@@ -175,32 +197,4 @@ html, body {
 }
 .tab-content ul li a:hover {
   text-decoration: underline;
-}
-
-/* CONTENT AREA */
-.content-area {
-  flex: 1;
-  background: var(--bg-content);
-  /* Account for top bar height */
-  height: calc(100vh - 60px);
-  padding: 20px;
-  box-sizing: border-box;
-  margin-left: min(18%, 280px);
-  margin-top: 60px; /* leave space for the top bar */
-  overflow: hidden;  /* prevent page scrolling */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-/* CONTENT PLACEHOLDER */
-.content-placeholder {
-  height: 100%;
-  width: 90%;
-  background-color: #ffffff;
-  color: var(--text-active);
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  overflow-y: auto;
 }

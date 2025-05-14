@@ -81,16 +81,22 @@ document.addEventListener("DOMContentLoaded", function () {
         li.classList.toggle("active");
         toggleExpand(li);
       } else if (type === "file") {
-        const fileNodes = menu.querySelectorAll('li[data-level="3"]');
-        fileNodes.forEach(node => node.classList.remove("active"));
-        li.classList.add("active");
-        const folder = li.dataset.folder;
-        const subfolder = li.dataset.subfolder;
-        const file = li.dataset.file;
-        const content = data[folder][subfolder][file];
-        const contentArea = document.querySelector(".content-placeholder");
-        contentArea.innerHTML = `<h1>${file}</h1><p>${content}</p>`;
-      }
+  // Remove the active class from all file nodes
+  const fileNodes = menu.querySelectorAll('li[data-level="3"]');
+  fileNodes.forEach(node => node.classList.remove("active"));
+  li.classList.add("active");
+  const folder = li.dataset.folder;
+  const subfolder = li.dataset.subfolder;
+  const file = li.dataset.file;
+  // Retrieve the content from the data object.
+  // This content can include any valid HTML (images, bold tags, indents, etc.)
+  const rawContent = data[folder][subfolder][file];
+  const contentArea = document.querySelector(".content-placeholder");
+  // Clear previous content and insert the file title as a header.
+  contentArea.innerHTML = `<h1>${file}</h1>`;
+  // Insert the raw HTML content provided in the data.
+  contentArea.insertAdjacentHTML('beforeend', rawContent);
+        }
     });
     return li;
   }
@@ -148,28 +154,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabButtons = document.querySelectorAll(".tab-button");
   const tabContents = document.querySelectorAll(".tab-content");
 
-  // Function to toggle tabs
-  function toggleTab(event) {
-    const tabId = event.currentTarget.getAttribute("data-tab");
-    const targetContent = document.getElementById(`${tabId}-content`);
-
-    // Hide all tab dropdowns first
-    tabContents.forEach(tab => {
-      if (tab !== targetContent) {
-        tab.style.display = "none";
-      }
-    });
-
-    // Toggle selected tab visibility
-    if (targetContent.style.display === "block") {
-      targetContent.style.display = "none";
-    } else {
-      targetContent.style.display = "block";
-    }
-  }
-
-  // Attach click events to each tab button
   tabButtons.forEach(button => {
-    button.addEventListener("click", toggleTab);
+    button.addEventListener("click", function () {
+      const tabId = button.getAttribute("data-tab");
+      const targetContent = document.getElementById(`${tabId}-content`);
+
+      // Toggle the target dropdown; hide others.
+      tabContents.forEach(content => {
+        if (content === targetContent) {
+          content.style.display =
+            content.style.display === "block" ? "none" : "block";
+        } else {
+          content.style.display = "none";
+        }
+      });
+    });
   });
 });
