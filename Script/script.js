@@ -1,9 +1,9 @@
 // This data structure defines the hierarchy of folders, subfolders, and files.
 const data = {
   "Intro": {
-    "Timeline": {
-      "File 1": "",
-      "File 2": "Content for Folder 1 > SubFolder 1-1 > File 2",
+    "Introduction": {
+      "Goals": "<p></p>",
+      "WIPs": "Content for Folder 1 > SubFolder 1-1 > File 2",
       "File 3": "Content for Folder 1 > SubFolder 1-1 > File 3"
     },
     "Resources": {

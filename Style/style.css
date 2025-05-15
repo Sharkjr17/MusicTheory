@@ -16,6 +16,7 @@
   --menu-item-active-bg-subfolder: #f39c12;
   --text-active: #2c3e50;
   --white-text: #ffffff;
+  --dark-bg: #7e7676;
   
   /* Transition timing */
   --transition-duration: 0.5s;
@@ -174,7 +175,7 @@ html, body {
 /* ---------- TAB DROPDOWN MENUS ---------- */
 .tab-content {
   display: none;
-  width: calc(100vw - min(18%, 280px));
+  width: calc(100vw - min(30%, 280px));
   background: var(--menu-item-bg);
   padding: 10px;
   border-radius: 5px;
@@ -187,12 +188,14 @@ html, body {
   list-style: none;
   margin: 0;
   padding: 0;
+  background-color: var(--dark-bg);
+  opacity: 75%;
 }
 .tab-content ul li {
   padding: 8px 10px;
 }
 .tab-content ul li a {
-  color: var(--text-active);
+  color: black;
   text-decoration: none;
 }
 .tab-content ul li a:hover {
